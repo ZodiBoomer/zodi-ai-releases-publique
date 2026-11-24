@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "app": "Zodi AI",
+  "channel": "stable",
+  "version": "0.0.0",
+  "publishedAt": null,
+  "minimumSupportedVersion": "0.0.0",
+  "platforms": {
+    "windows-x64": {
+      "version": "0.0.0",
+      "asset": null,
+      "sha256": null
+    },
+    "android-universal": {
+      "version": "0.0.0",
+      "asset": null,
+      "sha256": null
+    },
+    "linux-x64-deb": {
+      "version": "0.0.0",
+      "asset": null,
+      "sha256": null
+    },
+    "linux-x64-tar-gz": {
+      "version": "0.0.0",
+      "asset": null,
+      "sha256": null
+    }
+  },
+  "notes": "Placeholder manifest. No release has been published yet."
+}
