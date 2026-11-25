@@ -1,31 +1,43 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "app": "Zodi AI",
   "channel": "stable",
-  "version": "0.0.0",
-  "publishedAt": null,
+  "version": "0.3.42",
+  "publishedAt": "2026-11-25T17:35:05Z",
   "minimumSupportedVersion": "0.0.0",
   "platforms": {
     "windows-x64": {
-      "version": "0.0.0",
-      "asset": null,
-      "sha256": null
+      "version": "0.3.42",
+      "asset": "Zodi-AI-Setup-x64.exe",
+      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/desktop-v0.3.42/Zodi-AI-Setup-x64.exe",
+      "sha256": "dc9cda71990ea8a973b12398d7043e203145cba80dfcaf36493acd0bee595979",
+      "releaseTag": "desktop-v0.3.42",
+      "publishedAt": "2026-11-25T17:35:05Z"
     },
     "android-universal": {
-      "version": "0.0.0",
-      "asset": null,
-      "sha256": null
+      "version": "1.0.51",
+      "asset": "app-release.apk",
+      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/android-v1.0.51/app-release.apk",
+      "sha256": "cc1d81368f80a8dc3ab898236f8c25f543f0ef7a01c27d5442a62308fdb7007c",
+      "releaseTag": "android-v1.0.51",
+      "publishedAt": "2026-11-25T17:34:47Z"
     },
     "linux-x64-deb": {
-      "version": "0.0.0",
-      "asset": null,
-      "sha256": null
+      "version": "0.3.42",
+      "asset": "zodi-ai_0.3.42_amd64.deb",
+      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/desktop-v0.3.42/zodi-ai_0.3.42_amd64.deb",
+      "sha256": "dba47132e522bfc837a198e80f4a4f5199d150545c8090beded95399a0a8a4b6",
+      "releaseTag": "desktop-v0.3.42",
+      "publishedAt": "2026-11-25T17:35:05Z"
     },
     "linux-x64-tar-gz": {
-      "version": "0.0.0",
-      "asset": null,
-      "sha256": null
+      "version": "0.3.42",
+      "asset": "Zodi-AI-Linux-x64.tar.gz",
+      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/desktop-v0.3.42/Zodi-AI-Linux-x64.tar.gz",
+      "sha256": "77a9daf5fb42f8a13dcd782bed2f49a3f4061ac853f9b2735ebb6e86cc2879ce",
+      "releaseTag": "desktop-v0.3.42",
+      "publishedAt": "2026-11-25T17:35:05Z"
     }
   },
-  "notes": "Placeholder manifest. No release has been published yet."
+  "notes": "Current published stable assets. This index is refreshed automatically after future desktop and Android releases."
 }
