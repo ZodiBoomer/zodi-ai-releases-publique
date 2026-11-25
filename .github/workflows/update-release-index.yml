@@ -1,0 +1,160 @@
+name: Refresh unified Zodi AI update index
+
+on:
+  repository_dispatch:
+    types:
+      - zodi-desktop-release-published
+      - zodi-android-release-published
+
+permissions:
+  contents: write
+
+concurrency:
+  group: zodi-ai-release-index
+  cancel-in-progress: false
+
+jobs:
+  refresh-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge the newly published platform release into latest.json
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tag = context.payload.client_payload?.tag_name;
+            if (!tag) throw new Error("Missing release tag in repository_dispatch payload.");
+
+            const releaseResponse = await github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag
+            });
+            const release = releaseResponse.data;
+            const assets = release.assets || [];
+
+            async function readAssetJson(name) {
+              const asset = assets.find(item => item.name === name);
+              if (!asset) throw new Error(`Release ${tag} is missing ${name}`);
+              const response = await fetch(asset.browser_download_url, {
+                headers: { "User-Agent": "Zodi-AI-Release-Index" }
+              });
+              if (!response.ok) throw new Error(`Cannot download ${name}: HTTP ${response.status}`);
+              return await response.json();
+            }
+
+            function readChecksum(content, fileName) {
+              const line = content.split(/\r?\n/).find(value => {
+                const parts = value.trim().split(/\s+/);
+                return parts.length >= 2 && parts[parts.length - 1].replace(/^\*/, "") === fileName;
+              });
+              if (!line) throw new Error(`Missing SHA-256 for ${fileName}`);
+              const hash = line.trim().split(/\s+/)[0].toLowerCase();
+              if (!/^[a-f0-9]{64}$/.test(hash)) throw new Error(`Invalid SHA-256 for ${fileName}`);
+              return hash;
+            }
+
+            let index = {
+              schemaVersion: 2,
+              app: "Zodi AI",
+              channel: "stable",
+              publishedAt: null,
+              platforms: {
+                "windows-x64": null,
+                "android-universal": null,
+                "linux-x64-deb": null,
+                "linux-x64-tar-gz": null
+              },
+              notes: "Unified index of the latest published stable release for each platform."
+            };
+
+            try {
+              const current = await github.rest.repos.getContent({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                path: "latest.json"
+              });
+              if (!Array.isArray(current.data) && current.data.content) {
+                index = JSON.parse(Buffer.from(current.data.content, "base64").toString("utf8"));
+              }
+            } catch (error) {
+              if (error.status !== 404) throw error;
+            }
+
+            index.schemaVersion = 2;
+            index.app = "Zodi AI";
+            index.channel = "stable";
+            index.platforms ||= {};
+
+            if (tag.startsWith("desktop-v")) {
+              const manifest = await readAssetJson("latest-desktop.json");
+              index.version = manifest.version;
+              const checksumAsset = assets.find(item => item.name === (manifest.checksums || "SHA256SUMS.txt"));
+              if (!checksumAsset) throw new Error("Desktop SHA256SUMS.txt asset is missing.");
+              const checksumResponse = await fetch(checksumAsset.browser_download_url, {
+                headers: { "User-Agent": "Zodi-AI-Release-Index" }
+              });
+              if (!checksumResponse.ok) throw new Error("Unable to read desktop checksums.");
+              const checksumText = await checksumResponse.text();
+
+              for (const [key, manifestKey] of [
+                ["windows-x64", "windows-x64"],
+                ["linux-x64-deb", "linux-x64-deb"],
+                ["linux-x64-tar-gz", "linux-x64-tar-gz"]
+              ]) {
+                const entry = manifest.platforms?.[manifestKey];
+                if (!entry?.asset) throw new Error(`Desktop manifest is missing ${manifestKey}`);
+                const asset = assets.find(item => item.name === entry.asset);
+                if (!asset) throw new Error(`Release asset missing: ${entry.asset}`);
+                index.platforms[key] = {
+                  version: manifest.version,
+                  asset: asset.name,
+                  url: asset.browser_download_url,
+                  sha256: readChecksum(checksumText, asset.name),
+                  releaseTag: tag,
+                  publishedAt: release.published_at
+                };
+              }
+            } else if (tag.startsWith("android-v")) {
+              const manifest = await readAssetJson("latest-android.json");
+              index.version = manifest.version;
+              const asset = assets.find(item => item.name === manifest.asset);
+              if (!asset) throw new Error(`Android APK missing: ${manifest.asset}`);
+              if (!/^[a-f0-9]{64}$/i.test(manifest.sha256 || "")) {
+                throw new Error("Android manifest contains an invalid SHA-256.");
+              }
+              index.platforms["android-universal"] = {
+                version: manifest.version,
+                asset: asset.name,
+                url: asset.browser_download_url,
+                sha256: manifest.sha256.toLowerCase(),
+                releaseTag: tag,
+                publishedAt: release.published_at
+              };
+            } else {
+              throw new Error(`Unsupported release tag: ${tag}`);
+            }
+
+            index.publishedAt = new Date().toISOString();
+            const encoded = Buffer.from(JSON.stringify(index, null, 2) + "\n").toString("base64");
+
+            let sha;
+            try {
+              const existing = await github.rest.repos.getContent({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                path: "latest.json"
+              });
+              if (!Array.isArray(existing.data)) sha = existing.data.sha;
+            } catch (error) {
+              if (error.status !== 404) throw error;
+            }
+
+            await github.rest.repos.createOrUpdateFileContents({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              path: "latest.json",
+              message: `chore(releases): refresh unified update index for ${tag}`,
+              content: encoded,
+              ...(sha ? { sha } : {})
+            });
+            core.info(`Updated latest.json from ${tag}`);
