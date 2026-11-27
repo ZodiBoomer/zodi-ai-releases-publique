@@ -3,7 +3,7 @@
   "app": "Zodi AI",
   "channel": "stable",
   "version": "1.7.5.3",
-  "publishedAt": "2026-11-27T18:25:33.745Z",
+  "publishedAt": "2026-11-27T18:30:12.231Z",
   "minimumSupportedVersion": "0.0.0",
   "platforms": {
     "windows-x64": {
@@ -18,7 +18,7 @@
       "version": "1.7.5.3",
       "asset": "app-release.apk",
       "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/android-v1.7.5.3/app-release.apk",
-      "sha256": "538edc9fe726bc53a8f4885d3451bdb4c9eacec812f3cc1c4c29df464f7604c3",
+      "sha256": "22301ffd0fa06e88c3823c4346aad6d6d2a68da874882f7de8192aba722988f5",
       "releaseTag": "android-v1.7.5.3",
       "publishedAt": "2026-11-27T18:25:27Z"
     },
