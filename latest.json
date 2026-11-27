@@ -3,7 +3,7 @@
   "app": "Zodi AI",
   "channel": "stable",
   "version": "1.7.5.1",
-  "publishedAt": "2026-11-27T17:51:21.117Z",
+  "publishedAt": "2026-11-27T17:54:06.914Z",
   "minimumSupportedVersion": "0.0.0",
   "platforms": {
     "windows-x64": {
@@ -15,12 +15,12 @@
       "publishedAt": "2026-11-27T17:51:11Z"
     },
     "android-universal": {
-      "version": "1.7.5",
+      "version": "1.7.5.1",
       "asset": "app-release.apk",
-      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/android-v1.7.5/app-release.apk",
-      "sha256": "322bdd8c8cb6d6b383720dd075df2e4f993009176a13748e7df403575bba5ba0",
-      "releaseTag": "android-v1.7.5",
-      "publishedAt": "2026-11-27T17:34:35Z"
+      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/android-v1.7.5.1/app-release.apk",
+      "sha256": "045d8fea0d751a1fb1118e443931178e6ad6e2898ea07c8b0df02e1ff9dcf566",
+      "releaseTag": "android-v1.7.5.1",
+      "publishedAt": "2026-11-27T17:53:58Z"
     },
     "linux-x64-deb": {
       "version": "1.7.5.1",
