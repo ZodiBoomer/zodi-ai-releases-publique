@@ -3,16 +3,16 @@
   "app": "Zodi AI",
   "channel": "stable",
   "version": "1.7.5",
-  "publishedAt": "2026-11-27T17:34:43.745Z",
+  "publishedAt": "2026-11-27T17:35:16.164Z",
   "minimumSupportedVersion": "0.0.0",
   "platforms": {
     "windows-x64": {
-      "version": "1.7.3",
+      "version": "1.7.5",
       "asset": "Zodi-AI-Setup-x64.exe",
-      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/desktop-v1.7.3/Zodi-AI-Setup-x64.exe",
-      "sha256": "6e8b718b166d834547818d448795db755cd511575637c9afd0eb1d2fa9a7556c",
-      "releaseTag": "desktop-v1.7.3",
-      "publishedAt": "2026-11-27T17:26:51Z"
+      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/desktop-v1.7.5/Zodi-AI-Setup-x64.exe",
+      "sha256": "6eedb5956687911b2bb4c311eadfafb4572d7b5c07102bc8f2bac6ed1a54a823",
+      "releaseTag": "desktop-v1.7.5",
+      "publishedAt": "2026-11-27T17:35:03Z"
     },
     "android-universal": {
       "version": "1.7.5",
@@ -23,20 +23,20 @@
       "publishedAt": "2026-11-27T17:34:35Z"
     },
     "linux-x64-deb": {
-      "version": "1.7.3",
-      "asset": "zodi-ai_1.7.3_amd64.deb",
-      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/desktop-v1.7.3/zodi-ai_1.7.3_amd64.deb",
-      "sha256": "86c58e1c931f2879b7fa4801459a2f7d64d9db9aabd9998312d1c3f06e13cadc",
-      "releaseTag": "desktop-v1.7.3",
-      "publishedAt": "2026-11-27T17:26:51Z"
+      "version": "1.7.5",
+      "asset": "zodi-ai_1.7.5_amd64.deb",
+      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/desktop-v1.7.5/zodi-ai_1.7.5_amd64.deb",
+      "sha256": "b7c636dee3321dafeb62272468548e26d32f34728cf61d7efe803c2a684d07ac",
+      "releaseTag": "desktop-v1.7.5",
+      "publishedAt": "2026-11-27T17:35:03Z"
     },
     "linux-x64-tar-gz": {
-      "version": "1.7.3",
+      "version": "1.7.5",
       "asset": "Zodi-AI-Linux-x64.tar.gz",
-      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/desktop-v1.7.3/Zodi-AI-Linux-x64.tar.gz",
-      "sha256": "7f18c82cf01138a3d90994148ccd3f3b7c47c36ba65c849c302f71aef8b3418f",
-      "releaseTag": "desktop-v1.7.3",
-      "publishedAt": "2026-11-27T17:26:51Z"
+      "url": "https://github.com/ZodiBoomer/zodi-ai-releases-publique/releases/download/desktop-v1.7.5/Zodi-AI-Linux-x64.tar.gz",
+      "sha256": "bedf978572e3fa6f0b3b055401ccad942e4c93a0b62bcb089230c7b9ec9da493",
+      "releaseTag": "desktop-v1.7.5",
+      "publishedAt": "2026-11-27T17:35:03Z"
     }
   },
   "notes": "Current published stable assets. This index is refreshed automatically after future desktop and Android releases."
